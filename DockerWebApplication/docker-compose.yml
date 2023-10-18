@@ -17,6 +17,6 @@ services:
   web:
     container_name: docker-web-app
     hostname: api
-    build: DockerWebApplication/
+    build: ./
     ports:
       - "0.0.0.0:5003:5003"

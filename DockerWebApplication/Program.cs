@@ -1,11 +1,12 @@
+using DockerWebApplication.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var mariadbCS = Configuration.GetConnectionString("DefaultConnection");
+var mariadbCS = builder.Configuration.GetConnectionString("DefaultConnection");
 
-builder.Services.AddDbContext<MyApplicationContext>(options =>
+builder.Services.AddDbContext<DockerDBContext>(options =>
 {
     options.UseMySql(mariadbCS, new MySqlServerVersion(new Version(10, 5, 15)));
 });

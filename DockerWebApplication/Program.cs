@@ -1,4 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+
 var builder = WebApplication.CreateBuilder(args);
+
+var mariadbCS = Configuration.GetConnectionString("DefaultConnection");
+
+builder.Services.AddDbContext<MyApplicationContext>(options =>
+{
+    options.UseMySql(mariadbCS, new MySqlServerVersion(new Version(10, 5, 15)));
+});
 
 // Add services to the container.
 builder.Services.AddRazorPages();

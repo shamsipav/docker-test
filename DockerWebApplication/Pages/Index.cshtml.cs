@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DockerWebApplication.Data;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace DockerWebApplication.Pages
@@ -7,14 +8,19 @@ namespace DockerWebApplication.Pages
     {
         private readonly ILogger<IndexModel> _logger;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        private readonly DockerDBContext _context;
+
+        public List<User> Users { get; set; }
+
+        public IndexModel(ILogger<IndexModel> logger, DockerDBContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public void OnGet()
         {
-
+            Users = _context.Users.ToList();
         }
     }
 }
